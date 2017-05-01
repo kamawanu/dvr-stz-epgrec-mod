@@ -2,6 +2,13 @@
 
 // パーミッションを返す
 function getPerm( $file ) {
+	if( is_link($file) ){
+		$file = readlink($file);
+	}
+
+	if( is_readable($file) || is_writable($file) ){
+		return "777";
+	}
 	
 	$ss = @stat( $file );
 	return sprintf("%o", ($ss['mode'] & 000777));
