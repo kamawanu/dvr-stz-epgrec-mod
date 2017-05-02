@@ -136,6 +136,7 @@ try{
 		$arr = array();
 		$arr['id'] = $c->id;
 		$arr['name'] = $c->name;
+		$arr['sid'] = $c->sid;
 		$arr['selected'] = $channel_id == $c->id ? "selected" : "";
 		if( $channel_id == $c->id ) $k_station_name = $c->name;
 		array_push( $stations, $arr );

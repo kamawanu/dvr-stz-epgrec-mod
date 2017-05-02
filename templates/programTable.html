@@ -13,6 +13,9 @@
 <link rel="stylesheet" href="start/jquery-ui-1.7.2.custom.css" type="text/css">
 <script type="text/javascript" src="js/mdabasic.js"></script>
 <script type="text/javascript">
+function autoformstop () {
+	$("form#autoform").hidden();
+}
 	var PRG = {
 		rec:function(id){
 			$.get(INISet.prgRecordURL, { program_id: id } ,function(data){
@@ -169,7 +172,7 @@ table#reservation_table tr.prg_rec  {background-color: #F55;color:#FEE}
 </select>
 局<select name="station">
   {foreach from=$stations item=st}
-    <option value="{$st.id}" {$st.selected}>{$st.name}</option>
+    <option value="{$st.id}" {$st.selected}>{$st.name}({$st.sid}@{$st.id})</option>
   {/foreach}
   </select>
 カテゴリ<select name="category_id">
@@ -228,7 +231,7 @@ table#reservation_table tr.prg_rec  {background-color: #F55;color:#FEE}
 {if $do_keyword}
 {if (count($programs) < 300)}
 <div>
-<form method="post" action="keywordTable.php">
+<form method="post" id=autoform action="keywordTable.php">
   <b>語句:</b>{$search|escape}
   <b>正規表現:</b>{if $use_regexp}使う{else}使わない{/if}
   <b>種別:</b>{if $k_type == "*"}すべて{else}{$k_type}{/if}
