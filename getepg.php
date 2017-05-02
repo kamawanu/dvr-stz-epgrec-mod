@@ -56,7 +56,7 @@
 	return false;
   }
   
-  daemon();
+  #daemon();
   
   $settings = Settings::factory();
   
