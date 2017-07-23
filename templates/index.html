@@ -635,7 +635,7 @@ h2 {padding: 4px}
     <div class="ch_skip">{$program.skip}</div>
     <div class="ch_sid">{$program.sid}</div>
     <div class="ch_name">{$program.station_name}</div>
-    <div id="ch_title_str_{$program.ch_hash}" {if $program.skip == 1}class="ch_skip_color" {/if} style="cursor: pointer;" onClick="javascript:PRG.chdialog('{$program.ch_hash}')" >{$program.station_name}</div>
+    <div id="ch_title_str_{$program.ch_hash}" {if $program.skip == 1}class="ch_skip_color" {/if} style="cursor: pointer;" onClick="javascript:PRG.chdialog('{$program.ch_hash}')" >{$program.station_name} {$program.id}@{$program.sid}</div>
   </div>
   {else}
   <div class="ch_title"><div style="font-style:italic">no epg</div></div>
