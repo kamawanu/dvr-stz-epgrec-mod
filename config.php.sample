@@ -40,12 +40,12 @@ $RECORD_MODE = array(
 	// ※ 0は必須で、変更不可です。
 	0 => array(
 		'name' => 'Full TS',	// モードの表示名
-		'suffix' => '.ts',	// ファイル名のサフィックス
+		'suffix' => '.m2t',	// ファイル名のサフィックス
 	),
 	
 	1 => array(
 		'name' => 'Minimum TS',	// 最小のTS
-		'suffix' => '_tss.ts',	// do-record.shのカスタマイズが必要
+		'suffix' => '_tss.m2t',	// do-record.shのカスタマイズが必要
 	),
 	
 	/* Example is as follows.
