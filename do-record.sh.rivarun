@@ -7,7 +7,7 @@ echo "TYPE : $TYPE"
 echo "MODE : $MODE"
 echo "SID  : $SID"
 
-RECORDER=rivarun
+RECORDER=/usr/local/bin/rivarun
 
 if [ ${MODE} = 0 ]; then
    # MODE=0では必ず無加工のTSを吐き出すこと
