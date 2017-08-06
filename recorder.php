@@ -165,7 +165,7 @@ try{
 	if( time() > $starttime ) {
 		// 過去の録画予約
 		$rrec->complete = 1;	// 終わったことにする
-		throw new RecException("recorder:: なぜか過去の録画予約が実行された", EPGREC_ERROR );
+#		throw new RecException("recorder:: なぜか過去の録画予約が実行された", EPGREC_ERROR );
 	}
 	reclog("recorder:: 録画ID".$rrec->id .":".$rrec->type.$rrec->channel.$rrec->title."の録画ジョブ開始" );
 	
@@ -198,6 +198,7 @@ try{
 	
 	
 	// 録画開始まで待つ
+echo "wait $starttime.".time();
 	while( time() < $starttime ) {
 		if( ($message = epgrec_get_message() ) != null ) {
 			switch( $message ) {
