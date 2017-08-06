@@ -229,7 +229,6 @@ table#reservation_table tr.prg_rec  {background-color: #F55;color:#FEE}
 <div>{$programs|@count}件ヒット</div>
 {if count($programs) >= 300}<div>表示最大300件まで</div>{/if}
 {if $do_keyword}
-{if (count($programs) < 300)}
 <div>
 <form method="post" id=autoform action="keywordTable.php">
   <b>語句:</b>{$search|escape}
@@ -256,7 +255,6 @@ table#reservation_table tr.prg_rec  {background-color: #F55;color:#FEE}
   <br><input type="submit" value="この絞り込みを自動録画キーワードに登録" />
   </form>
 </div>
-{/if}
 {/if}
 
 <div id="floatBox4Dialog">jQuery UI Dialog</div>
