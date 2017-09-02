@@ -377,7 +377,8 @@ class Reservation {
 				throw new Exception("IDの指定が無効です");
 			}
 			if( ! $rec->complete ) {
-				if( toTimestamp($rec->starttime) < (time() + PADDING_TIME + $settings->former_time) ) {
+				$now_time = time() + PADDING_TIME + $settings->former_time;
+				if( toTimestamp($rec->starttime) < $now_time && toTimestamp($rec->endtime) > $now_time ) {
 					reclog("Reservation::cancel 実行中の予約ID".$rec->id."の取り消しが実行された" );
 					
 					// recorderとの通信を試みる
