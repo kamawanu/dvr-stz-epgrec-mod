@@ -240,6 +240,8 @@ class Reservation {
 			$filename = mb_str_replace("%DOW%",date("D", $start_time), $filename );
 			// %DOWJ%	曜日（日-土）
 			$filename = mb_str_replace("%DOWJ%",$day_of_week[(int)date("w", $start_time)], $filename );
+
+			$filename = mb_str_replace("%DOWN%",date("w", $start_time), $filename );
 			// %YEAR%	開始年
 			$filename = mb_str_replace("%YEAR%",date("Y", $start_time), $filename );
 			// %MONTH%	開始月
