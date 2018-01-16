@@ -8,6 +8,7 @@ echo "MODE : $MODE"
 echo "SID  : $SID"
 
 RECORDER="/usr/local/bin/node /usr/local/bin/rivarun"
+#TYPE=GR
 
 if [ ${MODE} = 0 ]; then
    # MODE=0では必ず無加工のTSを吐き出すこと
@@ -16,7 +17,5 @@ elif [ ${MODE} = 1 ]; then
    # 目的のSIDのみ残す
    exec $RECORDER --b25 --sid $SID --ch $TYPE/$CHANNEL $DURATION "${OUTPUT}" 
 # mode 2 example is as follows
-#elif [ ${MODE} = 2 ]; then
-#   $RECORDER $CHANNEL $DURATION ${OUTPUT}.tmp.ts --b25 --strip
 #   ffmpeg -i ${OUTPUT}.tmp.ts ... 適当なオプション ${OUTPUT}
 fi
