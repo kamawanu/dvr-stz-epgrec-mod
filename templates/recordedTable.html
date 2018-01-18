@@ -143,6 +143,9 @@ table#reservation_table tr.ctg_10, #category_select a.ctg_10 {background-color: 
 <body>
 
 <h2>{$sitetitle}</h2>
+{literal}
+<a href='javascript:$("a#delete_now").each(function(y,x){x.click();})'>.</A>
+{/literal}
 
 <p><a href="index.php">番組表に戻る</a></p>
 
@@ -193,11 +196,14 @@ table#reservation_table tr.ctg_10, #category_select a.ctg_10 {background-color: 
 EMPTY
 {else}
 {$rec.fsize}
+{if $rec.rec == 0 }
+<font color=red>[REC]</font>
+{/if}
 {/if}
 </td>
   <td><input type="button" value="変更" onClick="javascript:PRG.editdialog('{$rec.id}')" /></td>
   <td>{if $rec.fsize == null }
-<A HREF="javascript:PRG.rec({$rec.id});">delete now</A>
+<A id="delete_now" HREF="javascript:PRG.rec({$rec.id});">delete now</A>
 {else}
 <input type="button" value="削除" onClick="javascript:PRG.dialog('{$rec.id}','{$rec.title|escape}')" 
 {/if}</td>

@@ -63,9 +63,11 @@ try{
 		$arr['thumb'] = "<img src=\"".$settings->install_url.$settings->thumbs."/".htmlentities($r->path, ENT_QUOTES,"UTF-8").".jpg\" />";
 		$arr['cat'] = $cat->name_en;
 		$arr['mode'] = $RECORD_MODE[$r->mode]['name'];
-		if (file_exists(INSTALL_PATH.$settings->spool."/".$r->path))
+		if (file_exists(INSTALL_PATH.$settings->spool."/".$r->path)){
+$t = filemtime(INSTALL_PATH.$settings->spool."/".$r->path)-time();
+$arr["rec"] = $t;
 			$arr['fsize'] = filesize_n(INSTALL_PATH.$settings->spool."/".$r->path);
-		else
+		} else 
 			$arr['fsize'] = '';
 		
 		array_push( $records, $arr );
@@ -122,6 +124,8 @@ function filesize_n($path)
 		system('ls -al "'.$path.'" | awk \'BEGIN {FS=" "}{print $5}\'');
 		$size = ob_get_clean();
 	}
+
+
 	return human_filesize($size);
 }
 
@@ -131,4 +135,3 @@ function human_filesize($bytes, $decimals = 2) {
 	return sprintf("%.{$decimals}f", $bytes / pow(1024, $factor)) . @$sz[$factor];
 }
 
-?>
