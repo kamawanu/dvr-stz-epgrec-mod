@@ -201,11 +201,17 @@ EMPTY
 {/if}
 {/if}
 </td>
-  <td><input type="button" value="変更" onClick="javascript:PRG.editdialog('{$rec.id}')" /></td>
-  <td>{if $rec.fsize == null }
-<A id="delete_now" HREF="javascript:PRG.rec({$rec.id});">delete now</A>
+  <td><input type="button" value="変更" onClick="javascript:PRG.editdialog('{$rec.id}')" />
+<A HREF="/~honda/adminer-4.7.8.php?username=root&db=epgrec&edit=er1_reserveTbl&where%5Bid%5D={$rec.id}" target="_blank" >!</A>
+  </td>
+  <td>{if $rec.fsize == null or $rec.fsize == "38.00B" or $rec.fsize == "0.00B" }
+{if $rec.complete == 0 }
+<A HREF="/~honda/adminer-4.7.8.php?username=root&db=epgrec&edit=er1_reserveTbl&where%5Bid%5D={$rec.id}" target="_blank" >!</A>
 {else}
-<input type="button" value="削除" onClick="javascript:PRG.dialog('{$rec.id}','{$rec.title|escape}')" 
+<A id="delete_now" HREF="javascript:PRG.rec({$rec.id});">delete now</A>
+{/if}
+{else}
+<input type="button" value="削除" onClick="javascript:PRG.dialog('{$rec.id}','{$rec.title|escape}')" />
 {/if}</td>
  </tr>
 {/foreach}

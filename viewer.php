@@ -16,6 +16,8 @@ $settings = Settings::factory();
 if( ! isset( $_GET['reserve_id'] )) jdialog("予約番号が指定されていません", "recordedTable.php");
 $reserve_id = $_GET['reserve_id'];
 
+error_log($_SERVER["HTTP_USER_AGENT"]);
+
 try{
 	$rrec = new DBRecord( RESERVE_TBL, "id", $reserve_id );
 
@@ -34,11 +36,11 @@ try{
 	
 	header("Content-type: video/x-ms-asf; charset=\"UTF-8\"");
 	header('Content-Disposition: inline; filename="'.$rrec->path.'.asx"');
-	echo "<ASX version = \"3.0\">";
-	echo "<PARAM NAME = \"Encoding\" VALUE = \"UTF-8\" />";
+	echo "<ASX>";
+	#echo "<PARAM NAME = \"Encoding\" VALUE = \"UTF-8\" />";
 	echo "<ENTRY>";
-	if( ! $rrec->complete ) echo "<REF HREF=\"".$settings->install_url."/sendstream.php?reserve_id=".$rrec->id ."\" />";
-	echo "<REF HREF=\"".$settings->install_url.$settings->spool."/".$rrec->path ."\" />";
+	#if( ! $rrec->complete ) echo "<REF HREF=\"".$settings->install_url."/sendstream.php?reserve_id=".$rrec->id ."\" />";
+	echo "<REF HREF=\"".$settings->install_url.$settings->spool."/".rawurlencode($rrec->path) ."\" />";
 	echo "<TITLE>".$title."</TITLE>";
 	echo "<ABSTRACT>".$abstract."</ABSTRACT>";
 	echo "<DURATION VALUE=";
@@ -49,4 +51,3 @@ try{
 catch(exception $e ) {
 	exit( $e->getMessage() );
 }
-?>

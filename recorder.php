@@ -198,7 +198,7 @@ try{
 	
 	
 	// 録画開始まで待つ
-echo "wait $starttime.".time();
+###echo "wait $starttime.".time();
 	while( time() < $starttime ) {
 		if( ($message = epgrec_get_message() ) != null ) {
 			switch( $message ) {

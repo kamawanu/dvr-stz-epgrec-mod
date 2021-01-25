@@ -38,7 +38,7 @@ function storeProgram( $type, $xmlfile ) {
 	$map = array();
 	
 	// XML parse
-  	$xml = @simplexml_load_file( $xmlfile );
+  	$xml = simplexml_load_file( $xmlfile );
 	if( $xml === false ) {
 		reclog( "getepg:: 正常な".$xmlfile."が作成されなかった模様(放送間帯でないなら問題ありません)", EPGREC_WARN );
 		return;	// XMLが読み取れないなら何もしない
