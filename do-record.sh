@@ -1,20 +1,24 @@
-#!/bin/bash -e
-export PATH=/usr/local/bin:$PATH
+#!/bin/sh
+echo "CHANNEL : $CHANNEL"
+echo "DURATION: $DURATION"
+echo "OUTPUT  : $OUTPUT"
+echo "TUNER : $TUNER"
+echo "TYPE : $TYPE"
+echo "MODE : $MODE"
+echo "SID  : $SID"
 
-__MODE__=$( cat $0.TYPE )
-if [ 0$SID -lt 10000 ]
-then
-	__MODE__=pt1 # override
-fi
+RECORDER="/usr/local/bin/node /usr/local/bin/rivarun"
+#TYPE=GR
 
-__PATH__=$0.$__MODE__
-if [ \! -f $__PATH__ ]
-then
-	echo "$__PATH__" > "$OUTPUT"
-	exit 9
+if [ ${MODE} = 0 ]; then
+   # MODE=0では必ず無加工のTSを吐き出すこと
+   RECORDER="/usr/bin/tclsh $HOME/rivarunclone.tcl"
+   $RECORDER --priority 1 --ch $TYPE/$CHANNEL $DURATION "${OUTPUT}" 
+	echo $?
+elif [ ${MODE} = 1 ]; then
+   # 目的のSIDのみ残す
+   $RECORDER --priority 1 --b25 --sid $SID --ch $TYPE/$CHANNEL $DURATION "${OUTPUT}" || /usr/local/bin/recpt1 --b25 --ch $TYPE/$CHANNEL $DURATION "${OUTPUT}" 
+	echo $?
+# mode 2 example is as follows
+#   ffmpeg -i ${OUTPUT}.tmp.ts ... 適当なオプション ${OUTPUT}
 fi
-( 
-bash $__PATH__ $* 2>&1 
-) > "$OUTPUT".log
-[ -s "$OUTPUT" ] || rm "$OUTPUT".log
-chmod a+r "$OUTPUT"
